@@ -3,7 +3,7 @@
 	"name": "HTML Viewer Plus",
 	"version": "1.0.1",
 	"minAppVersion": "1.0.0",
-	"description": "增强版 HTML 查看器：嵌入预览、全屏、缩放、暗色同步、搜索、MHTML 支持、热刷新。",
+	"description": "Enhanced HTML viewer with embed previews, fullscreen, zoom, dark theme sync, search, MHTML support, and hot refresh.",
 	"author": "lzq",
 	"isDesktopOnly": true
 }

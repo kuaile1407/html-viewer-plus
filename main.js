@@ -29,6 +29,7 @@ const HTML_EXT = ["htm", "html", "shtml", "xht", "xhtml"];
 const MHTML_EXT = ["mht", "mhtml"];
 
 const DEFAULT_SETTINGS = {
+	language: "en",
 	defaultWidth: "100%",
 	aspectRatio: "4/3",
 	showToolbar: true,
@@ -42,6 +43,215 @@ const DEFAULT_SETTINGS = {
 	hotRefresh: false,
 	mhtmlSupport: true,
 };
+
+const HVP_TEXT = {
+	en: {
+		copied: "Copied: ",
+		pasted: "Pasted",
+		copy: "Copy",
+		paste: "Paste",
+		nothingToCopy: "Nothing to copy",
+		pasteUnavailable: "Paste is only available in editable fields",
+		contextEmbed: "Embed",
+		contextLink: "Link",
+		fullscreen: "Fullscreen",
+		openExternally: "Open externally",
+		locateFile: "Locate file",
+		zoomIn: "Zoom in",
+		zoomOut: "Zoom out",
+		resetZoom: "Reset zoom",
+		search: "Search",
+		refresh: "Refresh",
+		searchPlaceholder: "Search...",
+		previous: "Previous",
+		next: "Next",
+		close: "Close",
+		noResults: "No results",
+		unableOpenExternally: "Unable to open externally",
+		noUsableIds: "No usable IDs found in this HTML",
+		copyEmbedSyntax: "Click to copy embed syntax",
+		settings: "Settings",
+		guide: "Guide",
+		interface: "Interface",
+		language: "Language",
+		languageDesc: "Turn on for English, off for Chinese",
+		english: "English",
+		chinese: "中文",
+		embedSize: "Embed size",
+		defaultWidth: "Default width",
+		defaultWidthDesc: "Default embed width, such as 100% or 600px",
+		aspectRatio: "Aspect ratio",
+		aspectRatioDesc: "Embed aspect ratio. Supports formats like 4/3, 16:9, and 1.33. Height is calculated from the width.",
+		toolbar: "Toolbar",
+		showToolbar: "Show toolbar",
+		showToolbarDesc: "Show action buttons in the lower-right corner of embeds",
+		directOpenMode: "Direct open mode",
+		enableZoom: "Enable zoom",
+		enableZoomDesc: "Use Ctrl + mouse wheel to zoom content when opening HTML files directly",
+		zoomStep: "Zoom step",
+		zoomStepDesc: "Zoom amount per scroll step (0.05 to 0.5)",
+		enableSearch: "Enable search",
+		enableSearchDesc: "Show the search button in the toolbar when opening HTML files directly",
+		theme: "Theme",
+		syncDarkTheme: "Sync dark theme",
+		syncDarkThemeDesc: "Inject dark styles into HTML when Obsidian is using a dark theme",
+		customDarkCSS: "Custom dark CSS",
+		customDarkCSSDesc: "Custom CSS appended after the default dark styles",
+		customBg: "Custom background color",
+		customBgDesc: "Force the HTML body background color when enabled",
+		advanced: "Advanced",
+		hotRefresh: "Hot refresh",
+		hotRefreshDesc: "Automatically reload embedded content when the HTML file changes",
+		mhtmlSupport: "MHTML support",
+		mhtmlSupportDesc: "Support opening .mht and .mhtml web archive files (requires restarting the plugin)",
+		searchGuidePlaceholder: "Search guide...",
+		embedSyntax: "Embed syntax",
+		embedDefaultDesc: "Embed HTML using the default width and aspect ratio from plugin settings",
+		embedWidthDesc: "Embed HTML with a custom 400px width; height is calculated from the aspect ratio",
+		embedSizeDesc: "Embed HTML with a custom 400px width and 300px height, overriding the aspect ratio",
+		embedElementDesc: "Show only the specified element ID, hide other content, and fit the height automatically",
+		embedTip: "Tip: add id attributes to elements in your HTML so you can target them with #id",
+		directOpen: "Direct open",
+		directOpenDesc: "Click an HTML file in the file explorer to open it in a dedicated view that fills the editor height.",
+		embedModeToolbar: "Embed mode toolbar",
+		embedFullscreenDesc: "Fullscreen: show the embedded content fullscreen",
+		embedExternalDesc: "Open externally: open the file with the system default browser",
+		embedLocateDesc: "Locate file: open the HTML file in Obsidian",
+		embedToolbarDesc: "The toolbar is translucent by default and becomes fully visible on hover",
+		directToolbar: "Direct open toolbar",
+		directZoomDesc: "Zoom in / out, also available with Ctrl + mouse wheel",
+		directResetDesc: "Reset zoom to 100%",
+		directSearchDesc: "Open the search bar and find text inside the HTML, including tabbed content",
+		directRefreshDesc: "Refresh and reload the HTML content",
+		directExternalDesc: "Open the file externally with the system default app",
+		rightClickMenu: "Right-click menu",
+		rightClickOpenDesc: "Right-click inside HTML content to open the element menu",
+		rightClickAncestorsDesc: "The menu shows ancestor elements with IDs at the clicked position",
+		rightClickActionsDesc: "Copy text, paste into editable fields, or copy embed/link syntax for elements with IDs",
+		rightClickHoverDesc: "Hovering a menu item highlights the matching HTML element",
+		rightClickCloseDesc: "Left-click elsewhere in the HTML to close the menu",
+		embedBadge: "Embed badge and interaction",
+		embedBadgeDesc: "A < > badge appears in the upper-right corner on hover and jumps to the matching embed syntax in Markdown",
+		scrollGuardDesc: "Embed scrolling is guarded: click the content once before scrolling to avoid accidental scrolling in notes",
+		searchTabs: "Search and tab switching",
+		searchTabsDesc: "Click the search button and enter a keyword in the upper-right input. If the HTML uses tabs, search detects the tab containing the match and switches to it. Press Enter or Next for the next match, Previous for the prior match, and Esc or Close to exit search.",
+		darkThemeSync: "Dark theme sync",
+		darkThemeSyncDesc: "When enabled, the plugin injects dark CSS into HTML when Obsidian switches to a dark theme. Add overrides in Custom dark CSS.",
+		hotRefreshGuideDesc: "When enabled, embeds reload automatically after an HTML file is changed and saved externally. This is useful for live preview while editing HTML.",
+		mhtmlGuideDesc: "When enabled, .mht and .mhtml web archive files can be opened directly and rendered from their parsed HTML content.",
+		supportedFormats: "Supported file formats",
+		mhtmlRequires: "MHTML (requires enabling): .mht, .mhtml",
+		matches: " matches",
+		noMatches: "No matches",
+		disableEmbedHtml: "Consider disabling the Embed HTML plugin to avoid conflicts with HTML Viewer Plus",
+	},
+	zh: {
+		copied: "已复制: ",
+		pasted: "已粘贴",
+		copy: "复制",
+		paste: "粘贴",
+		nothingToCopy: "没有可复制的内容",
+		pasteUnavailable: "只能粘贴到可编辑字段",
+		contextEmbed: "嵌入",
+		contextLink: "链接",
+		fullscreen: "全屏",
+		openExternally: "外部打开",
+		locateFile: "定位到文件",
+		zoomIn: "放大",
+		zoomOut: "缩小",
+		resetZoom: "重置缩放",
+		search: "搜索",
+		refresh: "刷新",
+		searchPlaceholder: "搜索...",
+		previous: "上一个",
+		next: "下一个",
+		close: "关闭",
+		noResults: "无结果",
+		unableOpenExternally: "无法在外部打开",
+		noUsableIds: "此 HTML 中没有可用 ID",
+		copyEmbedSyntax: "点击复制嵌入语法",
+		settings: "基本设置",
+		guide: "使用说明",
+		interface: "界面",
+		language: "语言",
+		languageDesc: "开启为英文，关闭为中文",
+		english: "English",
+		chinese: "中文",
+		embedSize: "嵌入尺寸",
+		defaultWidth: "默认宽度",
+		defaultWidthDesc: "嵌入时的默认宽度，如 100%、600px",
+		aspectRatio: "宽高比",
+		aspectRatioDesc: "嵌入区域的宽高比。支持格式：4/3、16:9、1.33 等。宽度确定后高度按此比例自动计算。",
+		toolbar: "工具栏",
+		showToolbar: "显示工具栏",
+		showToolbarDesc: "在嵌入视图右下角显示操作按钮（全屏、外部打开、定位到文件）",
+		directOpenMode: "直接打开模式",
+		enableZoom: "启用缩放",
+		enableZoomDesc: "直接打开 HTML 文件时，使用 Ctrl + 鼠标滚轮缩放内容",
+		zoomStep: "缩放步长",
+		zoomStepDesc: "每次滚动的缩放比例（0.05 ~ 0.5）",
+		enableSearch: "启用搜索",
+		enableSearchDesc: "直接打开 HTML 文件时，在工具栏中显示搜索按钮",
+		theme: "主题",
+		syncDarkTheme: "同步暗色主题",
+		syncDarkThemeDesc: "Obsidian 使用暗色主题时，自动向 HTML 注入暗色样式",
+		customDarkCSS: "自定义暗色 CSS",
+		customDarkCSSDesc: "追加到默认暗色样式后面的自定义 CSS",
+		customBg: "自定义背景色",
+		customBgDesc: "开启后强制设置 HTML body 背景色",
+		advanced: "高级",
+		hotRefresh: "热刷新",
+		hotRefreshDesc: "HTML 文件被修改时自动重新加载嵌入内容",
+		mhtmlSupport: "MHTML 支持",
+		mhtmlSupportDesc: "支持打开 .mht / .mhtml 网页存档文件（需要重启插件）",
+		searchGuidePlaceholder: "搜索说明...",
+		embedSyntax: "嵌入语法",
+		embedDefaultDesc: "嵌入 HTML，使用插件设置中的默认宽度和宽高比",
+		embedWidthDesc: "嵌入 HTML，自定义宽度为 400px，高度按宽高比自动计算",
+		embedSizeDesc: "嵌入 HTML，自定义宽度 400px、高度 300px（覆盖宽高比）",
+		embedElementDesc: "只提取显示指定 id 元素的内容，隐藏其他内容，高度自适应",
+		embedTip: "提示：在 HTML 中为需要嵌入的元素添加 id 属性，即可通过 #id 精确定位",
+		directOpen: "直接打开",
+		directOpenDesc: "在文件管理器中点击 HTML 文件，会以独立视图打开，高度自动填满编辑区。",
+		embedModeToolbar: "嵌入模式工具栏",
+		embedFullscreenDesc: "⛶ 全屏 — 全屏显示嵌入内容",
+		embedExternalDesc: "↗ 外部打开 — 用系统默认浏览器打开文件",
+		embedLocateDesc: "→ 定位到文件 — 在 Obsidian 中打开该 HTML 文件",
+		embedToolbarDesc: "工具栏默认半透明，鼠标悬停时完全显示，不影响内容浏览",
+		directToolbar: "直接打开模式工具栏",
+		directZoomDesc: "＋ / － — 放大 / 缩小（也可用 Ctrl + 鼠标滚轮）",
+		directResetDesc: "↺ — 重置缩放到 100%",
+		directSearchDesc: "🔍 — 打开搜索栏，输入关键词后在 HTML 内查找文本（自动跳转到包含匹配内容的标签页）",
+		directRefreshDesc: "↻ — 手动刷新，重新加载 HTML 内容",
+		directExternalDesc: "↗ — 用系统默认浏览器 / 程序在外部打开文件",
+		rightClickMenu: "右键菜单（嵌入/直接打开）",
+		rightClickOpenDesc: "在 HTML 内容区域右键点击，弹出可用元素菜单",
+		rightClickAncestorsDesc: "菜单显示鼠标所在位置所有带 id 的祖先元素",
+		rightClickActionsDesc: "可复制文本、粘贴到可编辑字段，或为带 id 的元素复制嵌入/链接语法",
+		rightClickHoverDesc: "鼠标悬停在菜单条目上，对应 HTML 元素会显示蓝色高亮边框",
+		rightClickCloseDesc: "左键点击 HTML 其他区域可关闭菜单",
+		embedBadge: "嵌入徽章与交互",
+		embedBadgeDesc: "嵌入区域右上角显示 < > 徽章，hover 时可见，点击可定位到 Markdown 中对应的嵌入语法位置",
+		scrollGuardDesc: "嵌入内容有滚动保护：首次需要点击内容区域后才能滚动，避免在笔记中误触滚动嵌入内容",
+		searchTabs: "搜索功能与标签页跳转",
+		searchTabsDesc: "点击搜索按钮后，在右上角输入框输入关键词。如果 HTML 内容使用了标签页（tab）组织，搜索会自动检测匹配内容所在的标签页并切换过去。按 Enter 或点击 ▼ 跳到下一个匹配，点击 ▲ 跳到上一个。按 Esc 或点击 ✕ 关闭搜索。",
+		darkThemeSync: "暗色主题同步",
+		darkThemeSyncDesc: "开启后，当 Obsidian 切换到暗色主题时，会自动向 HTML 注入暗色 CSS 样式。可在「自定义暗色 CSS」中追加自己的样式覆盖。",
+		hotRefreshGuideDesc: "开启后，当 HTML 文件在外部被修改并保存时，嵌入视图会自动重新加载。适合实时预览编辑中的 HTML 文件。",
+		mhtmlGuideDesc: "开启后支持直接打开 .mht / .mhtml 网页存档文件，自动解析并渲染其中的 HTML 内容。",
+		supportedFormats: "支持的文件格式",
+		mhtmlRequires: "MHTML（需开启）: .mht, .mhtml",
+		matches: " 个匹配",
+		noMatches: "无匹配",
+		disableEmbedHtml: "建议禁用 Embed HTML 插件，避免与 HTML Viewer Plus 冲突",
+	},
+};
+
+function hvpText(plugin, key) {
+	var lang = (plugin && plugin.settings && plugin.settings.language) || "en";
+	var pack = HVP_TEXT[lang] || HVP_TEXT.en;
+	return pack[key] || HVP_TEXT.en[key] || key;
+}
 
 // --- Blob URL Cache: share blob URLs for same file + dark theme combo ---
 var _blobCache = {};
@@ -493,6 +703,7 @@ HtmlRenderer.prototype._setupLinks = function() {
 
 HtmlRenderer.prototype._setupContextMenu = function() {
 	var self = this;
+	var tx = function(key) { return hvpText(self.plugin, key); };
 	var SKIP_TAGS = ["marker", "defs", "lineargradient", "radialgradient", "clippath", "mask", "symbol", "use", "svg", "path", "g", "rect", "circle", "line", "polyline", "polygon", "text", "tspan", "canvas"];
 	function getLabel(el) {
 		var h = el.querySelector("h1, h2, h3, h4, h5, h6");
@@ -503,6 +714,38 @@ HtmlRenderer.prototype._setupContextMenu = function() {
 		if (raw) return raw.length > 25 ? raw.substring(0, 25) + "..." : raw;
 		return tag;
 	}
+	function isEditable(el) {
+		if (!el || el.nodeType !== 1) return false;
+		var tag = el.tagName.toLowerCase();
+		return tag === "textarea" || (tag === "input" && /^(text|search|url|tel|email|password|number)?$/i.test(el.type || "text")) || el.isContentEditable;
+	}
+	function findEditable(el, doc) {
+		if (isEditable(el)) return el;
+		if (doc.activeElement && isEditable(doc.activeElement)) return doc.activeElement;
+		return null;
+	}
+	function insertText(el, text) {
+		if (!el) return false;
+		var tag = el.tagName.toLowerCase();
+		if (tag === "textarea" || tag === "input") {
+			el.focus();
+			var start = typeof el.selectionStart === "number" ? el.selectionStart : el.value.length;
+			var end = typeof el.selectionEnd === "number" ? el.selectionEnd : start;
+			if (typeof el.setRangeText === "function") {
+				el.setRangeText(text, start, end, "end");
+			} else {
+				el.value = el.value.substring(0, start) + text + el.value.substring(end);
+			}
+			el.dispatchEvent(new Event("input", { bubbles: true }));
+			el.dispatchEvent(new Event("change", { bubbles: true }));
+			return true;
+		}
+		if (el.isContentEditable) {
+			el.focus();
+			return doc.execCommand("insertText", false, text);
+		}
+		return false;
+	}
 	try {
 		var doc = this.iframe.contentDocument;
 		if (!doc) return;
@@ -511,13 +754,15 @@ HtmlRenderer.prototype._setupContextMenu = function() {
 			var targets = [];
 			var walkEl = el;
 			while (walkEl && walkEl !== doc.body) {
-				if (SKIP_TAGS.indexOf(walkEl.tagName.toLowerCase()) !== -1) return;
+				if (SKIP_TAGS.indexOf(walkEl.tagName.toLowerCase()) !== -1) {
+					walkEl = walkEl.parentElement;
+					continue;
+				}
 				if (walkEl.id && walkEl.id !== "nav") {
 					targets.push({ el: walkEl, label: getLabel(walkEl), id: walkEl.id });
 				}
 				walkEl = walkEl.parentElement;
 			}
-			if (targets.length === 0) return;
 			e.preventDefault();
 			var existing = document.querySelector(".html-viewer-ctx-menu");
 			if (existing) existing.remove();
@@ -526,9 +771,29 @@ HtmlRenderer.prototype._setupContextMenu = function() {
 			var menuX = rect.left + e.clientX * (rect.width / doc.documentElement.clientWidth);
 			var menuY = rect.top + e.clientY * (rect.height / doc.documentElement.clientHeight);
 			if (menuX + 220 > window.innerWidth) menuX = window.innerWidth - 230;
-			if (menuY + targets.length * 90 > window.innerHeight) menuY = Math.max(4, window.innerHeight - targets.length * 90 - 20);
+			if (menuY + (targets.length + 1) * 90 > window.innerHeight) menuY = Math.max(4, window.innerHeight - (targets.length + 1) * 90 - 20);
 			menu.style.left = Math.max(4, menuX) + "px";
 			menu.style.top = Math.max(4, menuY) + "px";
+			var editGroup = menu.createDiv({ cls: "html-viewer-ctx-group" });
+			editGroup.createDiv({ cls: "html-viewer-ctx-id", text: tx("rightClickMenu") });
+			var editRow = editGroup.createDiv({ cls: "html-viewer-ctx-row" });
+			var copyBtn = editRow.createDiv({ cls: "html-viewer-ctx-item", text: tx("copy") });
+			var pasteBtn = editRow.createDiv({ cls: "html-viewer-ctx-item", text: tx("paste") });
+			copyBtn.addEventListener("click", function() {
+				var selection = doc.getSelection ? String(doc.getSelection()) : "";
+				var text = selection.trim() ? selection : ((el.innerText || el.textContent || "").trim());
+				if (!text) { new obsidian.Notice(tx("nothingToCopy")); menu.remove(); return; }
+				navigator.clipboard.writeText(text).then(function() { new obsidian.Notice(tx("copied") + text.substring(0, 80)); });
+				menu.remove();
+			});
+			pasteBtn.addEventListener("click", function() {
+				var target = findEditable(el, doc);
+				if (!target) { new obsidian.Notice(tx("pasteUnavailable")); menu.remove(); return; }
+				navigator.clipboard.readText().then(function(text) {
+					if (insertText(target, text)) new obsidian.Notice(tx("pasted"));
+				});
+				menu.remove();
+			});
 			for (var i = 0; i < targets.length; i++) {
 				(function(entry) {
 					var group = menu.createDiv({ cls: "html-viewer-ctx-group" });
@@ -543,16 +808,16 @@ HtmlRenderer.prototype._setupContextMenu = function() {
 					group.createDiv({ cls: "html-viewer-ctx-id", text: entry.label });
 					group.createDiv({ cls: "html-viewer-ctx-sep", text: "#" + entry.id });
 					var row = group.createDiv({ cls: "html-viewer-ctx-row" });
-					var btn1 = row.createDiv({ cls: "html-viewer-ctx-item", text: "嵌入" });
-					var btn2 = row.createDiv({ cls: "html-viewer-ctx-item", text: "链接" });
+					var btn1 = row.createDiv({ cls: "html-viewer-ctx-item", text: tx("contextEmbed") });
+					var btn2 = row.createDiv({ cls: "html-viewer-ctx-item", text: tx("contextLink") });
 					btn1.addEventListener("click", function() {
 						var s = "![[" + self.file.name + "#" + entry.id + "]]";
-						navigator.clipboard.writeText(s).then(function() { new obsidian.Notice("已复制: " + s); });
+						navigator.clipboard.writeText(s).then(function() { new obsidian.Notice(tx("copied") + s); });
 						menu.remove();
 					});
 					btn2.addEventListener("click", function() {
 						var s = "[[" + self.file.name + "#" + entry.id + "]]";
-						navigator.clipboard.writeText(s).then(function() { new obsidian.Notice("已复制: " + s); });
+						navigator.clipboard.writeText(s).then(function() { new obsidian.Notice(tx("copied") + s); });
 						menu.remove();
 					});
 				})(targets[i]);
@@ -603,24 +868,25 @@ HtmlRenderer.prototype.reload = function() {
 // --- Toolbar ---
 
 HtmlRenderer.prototype._createToolbar = function() {
+	var tx = function(key) { return hvpText(this.plugin, key); }.bind(this);
 	this.toolbar = this.containerEl.createDiv({ cls: "html-viewer-toolbar" });
 	if (!this.isFullView) {
-		makeBtn(this.toolbar, "⛶", "全屏", "html-viewer-toolbar-btn", this._toggleFullscreen.bind(this));
-		makeBtn(this.toolbar, "↗", "外部打开", "html-viewer-toolbar-btn", this._openExternally.bind(this));
-		makeBtn(this.toolbar, "→", "定位到文件", "html-viewer-toolbar-btn", this._gotoFile.bind(this));
+		makeBtn(this.toolbar, "⛶", tx("fullscreen"), "html-viewer-toolbar-btn", this._toggleFullscreen.bind(this));
+		makeBtn(this.toolbar, "↗", tx("openExternally"), "html-viewer-toolbar-btn", this._openExternally.bind(this));
+		makeBtn(this.toolbar, "→", tx("locateFile"), "html-viewer-toolbar-btn", this._gotoFile.bind(this));
 	} else {
 		if (this.s.enableZoom) {
-			makeBtn(this.toolbar, "＋", "放大", "html-viewer-toolbar-btn", this._zoomIn.bind(this));
+			makeBtn(this.toolbar, "＋", tx("zoomIn"), "html-viewer-toolbar-btn", this._zoomIn.bind(this));
 			this.zoomDisplay = this.toolbar.createSpan({ cls: "zoom-display", text: "100%" });
-			makeBtn(this.toolbar, "－", "缩小", "html-viewer-toolbar-btn", this._zoomOut.bind(this));
-			makeBtn(this.toolbar, "↺", "重置缩放", "html-viewer-toolbar-btn", this._zoomReset.bind(this));
+			makeBtn(this.toolbar, "－", tx("zoomOut"), "html-viewer-toolbar-btn", this._zoomOut.bind(this));
+			makeBtn(this.toolbar, "↺", tx("resetZoom"), "html-viewer-toolbar-btn", this._zoomReset.bind(this));
 			this.toolbar.createSpan({ cls: "html-viewer-toolbar-sep" });
 		}
 		if (this.s.enableSearch) {
-			makeBtn(this.toolbar, "🔍", "搜索", "html-viewer-toolbar-btn", this._toggleSearch.bind(this));
+			makeBtn(this.toolbar, "🔍", tx("search"), "html-viewer-toolbar-btn", this._toggleSearch.bind(this));
 		}
-		makeBtn(this.toolbar, "↻", "刷新", "html-viewer-toolbar-btn", this.reload.bind(this));
-		makeBtn(this.toolbar, "↗", "外部打开", "html-viewer-toolbar-btn", this._openExternally.bind(this));
+		makeBtn(this.toolbar, "↻", tx("refresh"), "html-viewer-toolbar-btn", this.reload.bind(this));
+		makeBtn(this.toolbar, "↗", tx("openExternally"), "html-viewer-toolbar-btn", this._openExternally.bind(this));
 	}
 };
 
@@ -644,6 +910,7 @@ HtmlRenderer.prototype._setupSearchShortcut = function() {
 
 HtmlRenderer.prototype._toggleSearch = function() {
 	var self = this;
+	var tx = function(key) { return hvpText(self.plugin, key); };
 	if (this.searchBar) {
 		this.searchBar.remove();
 		this.searchBar = null;
@@ -651,11 +918,11 @@ HtmlRenderer.prototype._toggleSearch = function() {
 		return;
 	}
 	this.searchBar = this.containerEl.createDiv({ cls: "html-viewer-search" });
-	var input = this.searchBar.createEl("input", { attr: { type: "text", placeholder: "搜索...", spellcheck: "false" } });
+	var input = this.searchBar.createEl("input", { attr: { type: "text", placeholder: tx("searchPlaceholder"), spellcheck: "false" } });
 	this.searchCount = this.searchBar.createSpan({ cls: "search-count", text: "" });
-	makeBtn(this.searchBar, "▲", "上一个", "html-viewer-toolbar-btn", function() { self._gotoMatch(-1, input.value); });
-	makeBtn(this.searchBar, "▼", "下一个", "html-viewer-toolbar-btn", function() { self._gotoMatch(1, input.value); });
-	makeBtn(this.searchBar, "✕", "关闭", "html-viewer-toolbar-btn", function() { self._toggleSearch(); });
+	makeBtn(this.searchBar, "▲", tx("previous"), "html-viewer-toolbar-btn", function() { self._gotoMatch(-1, input.value); });
+	makeBtn(this.searchBar, "▼", tx("next"), "html-viewer-toolbar-btn", function() { self._gotoMatch(1, input.value); });
+	makeBtn(this.searchBar, "✕", tx("close"), "html-viewer-toolbar-btn", function() { self._toggleSearch(); });
 	input.addEventListener("keydown", function(e) {
 		if (e.key === "Enter") { e.preventDefault(); self._gotoMatch(e.shiftKey ? -1 : 1, input.value); }
 		if (e.key === "Escape") self._toggleSearch();
@@ -695,7 +962,7 @@ HtmlRenderer.prototype._doSearch = function(q) {
 	this._matchIdx = -1;
 	if (!q) { if (this.searchCount) this.searchCount.textContent = ""; return; }
 	this._matchRanges = this._collectMatches(q);
-	if (this.searchCount) this.searchCount.textContent = this._matchRanges.length > 0 ? "0/" + this._matchRanges.length : "无结果";
+	if (this.searchCount) this.searchCount.textContent = this._matchRanges.length > 0 ? "0/" + this._matchRanges.length : hvpText(this.plugin, "noResults");
 	if (this._matchRanges.length > 0) this._gotoMatch(1, q);
 };
 
@@ -864,7 +1131,7 @@ HtmlRenderer.prototype._openExternally = function() {
 		var electron = require("electron");
 		electron.shell.openPath(path.join(basePath, this.file.path));
 	} catch (e) {
-		new obsidian.Notice("无法在外部打开");
+		new obsidian.Notice(hvpText(this.plugin, "unableOpenExternally"));
 	}
 };
 
@@ -908,9 +1175,10 @@ HtmlRenderer.prototype._toggleIdPicker = function() {
 			if (!label) label = id;
 			items.push({ id: id, label: label.substring(0, 40), typeTag: typeTag });
 		}
-		if (items.length === 0) { new obsidian.Notice("此 HTML 中没有可用 ID"); return; }
+		var tx = function(key) { return hvpText(self.plugin, key); };
+		if (items.length === 0) { new obsidian.Notice(tx("noUsableIds")); return; }
 		var picker = this.containerEl.createDiv({ cls: "html-viewer-id-picker" });
-		picker.createEl("div", { cls: "html-viewer-id-picker-title", text: "点击复制嵌入语法" });
+		picker.createEl("div", { cls: "html-viewer-id-picker-title", text: tx("copyEmbedSyntax") });
 		var closeBtn = picker.createEl("button", { cls: "html-viewer-id-picker-close", text: "✕" });
 		closeBtn.addEventListener("click", function() { self._closeIdPicker(); });
 		var list = picker.createDiv({ cls: "html-viewer-id-picker-list" });
@@ -941,7 +1209,7 @@ HtmlRenderer.prototype._toggleIdPicker = function() {
 						if (el) el.style.boxShadow = "";
 						var syntax = "![[" + self.file.name + "#" + idVal + "]]";
 						navigator.clipboard.writeText(syntax).then(function() {
-							new obsidian.Notice("已复制: " + syntax);
+							new obsidian.Notice(tx("copied") + syntax);
 						});
 						self._closeIdPicker();
 					};
@@ -1076,11 +1344,12 @@ var HtmlViewerSettingsTab = (function(_super) {
 		var self = this;
 
 		containerEl.createEl("h2", { text: "HTML Viewer Plus" });
+		var tx = function(key) { return hvpText(plugin, key); };
 
 		// Tab bar
 		var tabBar = containerEl.createDiv({ cls: "html-viewer-tabs" });
-		var tabSettings = tabBar.createDiv({ cls: "html-viewer-tab" + (this._activeTab === "settings" ? " active" : ""), text: "基本设置" });
-		var tabGuide = tabBar.createDiv({ cls: "html-viewer-tab" + (this._activeTab === "guide" ? " active" : ""), text: "使用说明" });
+		var tabSettings = tabBar.createDiv({ cls: "html-viewer-tab" + (this._activeTab === "settings" ? " active" : ""), text: tx("settings") });
+		var tabGuide = tabBar.createDiv({ cls: "html-viewer-tab" + (this._activeTab === "guide" ? " active" : ""), text: tx("guide") });
 
 		var settingsContent = containerEl.createDiv({ cls: "html-viewer-tab-content" });
 		var guideContent = containerEl.createDiv({ cls: "html-viewer-tab-content" });
@@ -1110,79 +1379,97 @@ var HtmlViewerSettingsTab = (function(_super) {
 	};
 
 	HtmlViewerSettingsTab.prototype._buildSettings = function(containerEl, s, plugin) {
-		containerEl.createEl("h3", { text: "嵌入尺寸" });
+		var self = this;
+		var tx = function(key) { return hvpText(plugin, key); };
+
+		containerEl.createEl("h3", { text: tx("interface") });
 
 		new obsidian.Setting(containerEl)
-			.setName("默认宽度")
-			.setDesc("嵌入时的默认宽度，如 100%、600px")
+			.setName(tx("language"))
+			.setDesc(tx("languageDesc"))
+			.addToggle(function(t) {
+				t.setValue((s.language || "en") === "en");
+				t.onChange(function(v) {
+					s.language = v ? "en" : "zh";
+					plugin.saveSettings();
+					self.display();
+				});
+			});
+
+		containerEl.createEl("h3", { text: tx("embedSize") });
+
+		new obsidian.Setting(containerEl)
+			.setName(tx("defaultWidth"))
+			.setDesc(tx("defaultWidthDesc"))
 			.addText(function(t) { t.setValue(s.defaultWidth).onChange(function(v) { s.defaultWidth = v; plugin.saveSettings(); }); });
 
 		new obsidian.Setting(containerEl)
-			.setName("宽高比")
-			.setDesc("嵌入区域的宽高比。支持格式：4/3、16:9、1.33 等。宽度确定后高度按此比例自动计算。")
+			.setName(tx("aspectRatio"))
+			.setDesc(tx("aspectRatioDesc"))
 			.addText(function(t) { t.setValue(s.aspectRatio).onChange(function(v) { s.aspectRatio = v; plugin.saveSettings(); }); });
 
-		containerEl.createEl("h3", { text: "工具栏" });
+		containerEl.createEl("h3", { text: tx("toolbar") });
 
 		new obsidian.Setting(containerEl)
-			.setName("显示工具栏")
-			.setDesc("在嵌入视图右下角显示操作按钮（全屏、外部打开、定位到文件）")
+			.setName(tx("showToolbar"))
+			.setDesc(tx("showToolbarDesc"))
 			.addToggle(function(t) { t.setValue(s.showToolbar).onChange(function(v) { s.showToolbar = v; plugin.saveSettings(); }); });
 
-		containerEl.createEl("h3", { text: "直接打开模式" });
+		containerEl.createEl("h3", { text: tx("directOpenMode") });
 
 		new obsidian.Setting(containerEl)
-			.setName("启用缩放")
-			.setDesc("直接打开 HTML 文件时，使用 Ctrl + 鼠标滚轮缩放内容")
+			.setName(tx("enableZoom"))
+			.setDesc(tx("enableZoomDesc"))
 			.addToggle(function(t) { t.setValue(s.enableZoom).onChange(function(v) { s.enableZoom = v; plugin.saveSettings(); }); });
 
 		new obsidian.Setting(containerEl)
-			.setName("缩放步长")
-			.setDesc("每次滚动的缩放比例（0.05 ~ 0.5）")
+			.setName(tx("zoomStep"))
+			.setDesc(tx("zoomStepDesc"))
 			.addText(function(t) { t.setValue(String(s.zoomStep)).onChange(function(v) { s.zoomStep = parseFloat(v) || 0.1; plugin.saveSettings(); }); });
 
 		new obsidian.Setting(containerEl)
-			.setName("启用搜索")
-			.setDesc("直接打开 HTML 文件时，在工具栏中显示搜索按钮")
+			.setName(tx("enableSearch"))
+			.setDesc(tx("enableSearchDesc"))
 			.addToggle(function(t) { t.setValue(s.enableSearch).onChange(function(v) { s.enableSearch = v; plugin.saveSettings(); }); });
 
-		containerEl.createEl("h3", { text: "主题" });
+		containerEl.createEl("h3", { text: tx("theme") });
 
 		new obsidian.Setting(containerEl)
-			.setName("同步暗色主题")
-			.setDesc("Obsidian 使用暗色主题时，自动向 HTML 注入暗色样式")
+			.setName(tx("syncDarkTheme"))
+			.setDesc(tx("syncDarkThemeDesc"))
 			.addToggle(function(t) { t.setValue(s.syncDarkTheme).onChange(function(v) { s.syncDarkTheme = v; plugin.saveSettings(); }); });
 
 		new obsidian.Setting(containerEl)
-			.setName("自定义暗色 CSS")
-			.setDesc("追加到默认暗色样式后面的自定义 CSS")
+			.setName(tx("customDarkCSS"))
+			.setDesc(tx("customDarkCSSDesc"))
 			.addTextArea(function(t) { t.setPlaceholder("body { filter: invert(0.05); }").setValue(s.customDarkCSS).onChange(function(v) { s.customDarkCSS = v; plugin.saveSettings(); }); });
 
 		new obsidian.Setting(containerEl)
-			.setName("自定义背景色")
-			.setDesc("开启后强制设置 HTML body 背景色")
+			.setName(tx("customBg"))
+			.setDesc(tx("customBgDesc"))
 			.addColorPicker(function(cp) { cp.setValue(s.bgColor).onChange(function(v) { s.bgColor = v; plugin.saveSettings(); }); })
 			.addToggle(function(t) { t.setValue(s.bgColorEnabled).onChange(function(v) { s.bgColorEnabled = v; plugin.saveSettings(); }); });
 
-		containerEl.createEl("h3", { text: "高级" });
+		containerEl.createEl("h3", { text: tx("advanced") });
 
 		new obsidian.Setting(containerEl)
-			.setName("热刷新")
-			.setDesc("HTML 文件被修改时自动重新加载嵌入内容")
+			.setName(tx("hotRefresh"))
+			.setDesc(tx("hotRefreshDesc"))
 			.addToggle(function(t) { t.setValue(s.hotRefresh).onChange(function(v) { s.hotRefresh = v; plugin.saveSettings(); }); });
 
 		new obsidian.Setting(containerEl)
-			.setName("MHTML 支持")
-			.setDesc("支持打开 .mht / .mhtml 网页存档文件（需要重启插件）")
+			.setName(tx("mhtmlSupport"))
+			.setDesc(tx("mhtmlSupportDesc"))
 			.addToggle(function(t) { t.setValue(s.mhtmlSupport).onChange(function(v) { s.mhtmlSupport = v; plugin.saveSettings(); }); });
 	};
 
 	HtmlViewerSettingsTab.prototype._buildGuide = function(containerEl, tabBar, showSettings, showGuide) {
+		var tx = function(key) { return hvpText(this.plugin, key); }.bind(this);
 		var guide = containerEl.createDiv({ cls: "html-viewer-guide" });
 
 		// Guide search
 		var searchWrap = guide.createDiv({ cls: "html-viewer-guide-search" });
-		var searchInput = searchWrap.createEl("input", { attr: { type: "text", placeholder: "搜索说明...", spellcheck: "false" } });
+		var searchInput = searchWrap.createEl("input", { attr: { type: "text", placeholder: tx("searchGuidePlaceholder"), spellcheck: "false" } });
 		var searchResult = searchWrap.createSpan({ cls: "html-viewer-guide-search-result" });
 
 		// Sections data for search
@@ -1195,77 +1482,77 @@ var HtmlViewerSettingsTab = (function(_super) {
 			sections.push({ title: title, h4: h4, wrap: wrap });
 		}
 
-			addSection("嵌入语法", function(wrap) {
+			addSection(tx("embedSyntax"), function(wrap) {
 				var list = wrap.createEl("ul");
 					var items = [
-						{ code: "![[file.html]]", desc: "嵌入 HTML，使用插件设置中的默认宽度和宽高比" },
-						{ code: "![[file.html|400]]", desc: "嵌入 HTML，自定义宽度为 400px，高度按宽高比自动计算" },
-						{ code: "![[file.html|400x300]]", desc: "嵌入 HTML，自定义宽度 400px、高度 300px（覆盖宽高比）" },
-							{ code: "![[file.html#elementId]]", desc: "只提取显示指定 id 元素的内容，隐藏其他内容，高度自适应" },
+						{ code: "![[file.html]]", desc: tx("embedDefaultDesc") },
+						{ code: "![[file.html|400]]", desc: tx("embedWidthDesc") },
+						{ code: "![[file.html|400x300]]", desc: tx("embedSizeDesc") },
+							{ code: "![[file.html#elementId]]", desc: tx("embedElementDesc") },
 					];
 				for (var i = 0; i < items.length; i++) {
 					var li = list.createEl("li");
 					li.createEl("code", { text: items[i].code });
 					li.createSpan({ text: " — " + items[i].desc });
 				}
-				list.createEl("li", { text: "提示：在 HTML 中为需要嵌入的元素添加 id 属性，即可通过 #id 精确定位" });
+				list.createEl("li", { text: tx("embedTip") });
 			});
 
-		addSection("直接打开", function(wrap) {
-			wrap.createEl("p", { text: "在文件管理器中点击 HTML 文件，会以独立视图打开，高度自动填满编辑区。" });
+		addSection(tx("directOpen"), function(wrap) {
+			wrap.createEl("p", { text: tx("directOpenDesc") });
 		});
 
-			addSection("嵌入模式工具栏", function(wrap) {
+			addSection(tx("embedModeToolbar"), function(wrap) {
 				var list = wrap.createEl("ul");
-				list.createEl("li", { text: "⛶ 全屏 — 全屏显示嵌入内容" });
-				list.createEl("li", { text: "↗ 外部打开 — 用系统默认浏览器打开文件" });
-				list.createEl("li", { text: "→ 定位到文件 — 在 Obsidian 中打开该 HTML 文件" });
-				list.createEl("li", { text: "工具栏默认半透明，鼠标悬停时完全显示，不影响内容浏览" });
+				list.createEl("li", { text: tx("embedFullscreenDesc") });
+				list.createEl("li", { text: tx("embedExternalDesc") });
+				list.createEl("li", { text: tx("embedLocateDesc") });
+				list.createEl("li", { text: tx("embedToolbarDesc") });
 			});
-		addSection("直接打开模式工具栏", function(wrap) {
+		addSection(tx("directToolbar"), function(wrap) {
 			var list = wrap.createEl("ul");
-			list.createEl("li", { text: "＋ / － — 放大 / 缩小（也可用 Ctrl + 鼠标滚轮）" });
-			list.createEl("li", { text: "↺ — 重置缩放到 100%" });
-			list.createEl("li", { text: "🔍 — 打开搜索栏，输入关键词后在 HTML 内查找文本（自动跳转到包含匹配内容的标签页）" });
-			list.createEl("li", { text: "↻ — 手动刷新，重新加载 HTML 内容" });
-			list.createEl("li", { text: "↗ — 用系统默认浏览器 / 程序在外部打开文件" });
+			list.createEl("li", { text: tx("directZoomDesc") });
+			list.createEl("li", { text: tx("directResetDesc") });
+			list.createEl("li", { text: tx("directSearchDesc") });
+			list.createEl("li", { text: tx("directRefreshDesc") });
+			list.createEl("li", { text: tx("directExternalDesc") });
 		});
 
-			addSection("右键菜单（嵌入/直接打开）", function(wrap) {
+			addSection(tx("rightClickMenu"), function(wrap) {
 				var list = wrap.createEl("ul");
-				list.createEl("li", { text: "在 HTML 内容区域右键点击，弹出可用元素菜单" });
-				list.createEl("li", { text: "菜单显示鼠标所在位置所有带 id 的祖先元素" });
-				list.createEl("li", { text: "每个元素提供两个操作：嵌入（![[file#id]]）、链接（[[file#id]]）" });
-				list.createEl("li", { text: "鼠标悬停在菜单条目上，对应 HTML 元素会显示蓝色高亮边框" });
-				list.createEl("li", { text: "左键点击 HTML 其他区域可关闭菜单" });
+				list.createEl("li", { text: tx("rightClickOpenDesc") });
+				list.createEl("li", { text: tx("rightClickAncestorsDesc") });
+				list.createEl("li", { text: tx("rightClickActionsDesc") });
+				list.createEl("li", { text: tx("rightClickHoverDesc") });
+				list.createEl("li", { text: tx("rightClickCloseDesc") });
 			});
 
-			addSection("嵌入徽章与交互", function(wrap) {
+			addSection(tx("embedBadge"), function(wrap) {
 				var list = wrap.createEl("ul");
-				list.createEl("li", { text: "嵌入区域右上角显示 < > 徽章，hover 时可见，点击可定位到 Markdown 中对应的嵌入语法位置" });
-				list.createEl("li", { text: "嵌入内容有滚动保护：首次需要点击内容区域后才能滚动，避免在笔记中误触滚动嵌入内容" });
+				list.createEl("li", { text: tx("embedBadgeDesc") });
+				list.createEl("li", { text: tx("scrollGuardDesc") });
 			});
 
-		addSection("搜索功能与标签页跳转", function(wrap) {
-			wrap.createEl("p", { text: "点击搜索按钮后，在右上角输入框输入关键词。如果 HTML 内容使用了标签页（tab）组织，搜索会自动检测匹配内容所在的标签页并切换过去。按 Enter 或点击 ▼ 跳到下一个匹配，点击 ▲ 跳到上一个。按 Esc 或点击 ✕ 关闭搜索。" });
+		addSection(tx("searchTabs"), function(wrap) {
+			wrap.createEl("p", { text: tx("searchTabsDesc") });
 		});
 
-		addSection("暗色主题同步", function(wrap) {
-			wrap.createEl("p", { text: "开启后，当 Obsidian 切换到暗色主题时，会自动向 HTML 注入暗色 CSS 样式。可在「自定义暗色 CSS」中追加自己的样式覆盖。" });
+		addSection(tx("darkThemeSync"), function(wrap) {
+			wrap.createEl("p", { text: tx("darkThemeSyncDesc") });
 		});
 
-		addSection("热刷新", function(wrap) {
-			wrap.createEl("p", { text: "开启后，当 HTML 文件在外部被修改并保存时，嵌入视图会自动重新加载。适合实时预览编辑中的 HTML 文件。" });
+		addSection(tx("hotRefresh"), function(wrap) {
+			wrap.createEl("p", { text: tx("hotRefreshGuideDesc") });
 		});
 
-		addSection("MHTML 支持", function(wrap) {
-			wrap.createEl("p", { text: "开启后支持直接打开 .mht / .mhtml 网页存档文件，自动解析并渲染其中的 HTML 内容。" });
+		addSection(tx("mhtmlSupport"), function(wrap) {
+			wrap.createEl("p", { text: tx("mhtmlGuideDesc") });
 		});
 
-		addSection("支持的文件格式", function(wrap) {
+		addSection(tx("supportedFormats"), function(wrap) {
 			var list = wrap.createEl("ul");
 			list.createEl("li", { text: "HTML: .html, .htm, .shtml, .xht, .xhtml" });
-			list.createEl("li", { text: "MHTML（需开启）: .mht, .mhtml" });
+			list.createEl("li", { text: tx("mhtmlRequires") });
 		});
 
 		// Search logic
@@ -1296,7 +1583,7 @@ var HtmlViewerSettingsTab = (function(_super) {
 					sec.wrap.style.display = "none";
 				}
 			}
-			searchResult.textContent = matchCount > 0 ? matchCount + " 个匹配" : "无匹配";
+			searchResult.textContent = matchCount > 0 ? matchCount + tx("matches") : tx("noMatches");
 			if (firstMatch) firstMatch.h4.scrollIntoView({ behavior: "smooth", block: "nearest" });
 		});
 
@@ -1341,7 +1628,7 @@ HtmlViewerPlusPlugin.prototype.onload = function() {
 		self.addSettingTab(new HtmlViewerSettingsTab(self.app, self));
 
 		if (self.app.plugins.getPlugin && self.app.plugins.getPlugin("embed-html")) {
-			new obsidian.Notice("建议禁用 Embed HTML 插件，避免与 HTML Viewer Plus 冲突");
+			new obsidian.Notice(hvpText(self, "disableEmbedHtml"));
 		}
 
 		console.log("HTML Viewer Plus loaded");
