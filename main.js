@@ -347,6 +347,7 @@ HtmlRenderer.prototype._updateSize = function() {
 		if (this.iframe) {
 			this.iframe.style.minHeight = "";
 			this.iframe.style.aspectRatio = "";
+			this.iframe.style.height = "100%";
 		}
 	} else {
 		this.containerEl.setCssProps({ width: parseSize(w) });
